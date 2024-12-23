@@ -3,7 +3,6 @@ import 'package:cleanarc_proj/src/features/posts/data/model/post_model.dart';
 import 'package:cleanarc_proj/src/features/posts/domain/usecases/posts_usecases.dart';
 import 'package:flutter/material.dart';
 
-
 class PostPage extends StatefulWidget {
   const PostPage({super.key});
 
@@ -27,7 +26,7 @@ class _PostPageState extends State<PostPage> {
   void fetchData() async {
     final data = await postsUsecases.fetchPosts();
     setState(() {
-      posts=data;
+      posts = data;
     });
     // try {
     //   final response = await client
@@ -55,25 +54,22 @@ class _PostPageState extends State<PostPage> {
       // body: ListView(
       //   children: [Text(posts.toString())],
       // ),
-      body: (posts.isEmpty)?
-      const Center(child: CircularProgressIndicator(),)
-      :ListView.builder(
-        physics: BouncingScrollPhysics(),
-        itemBuilder: (context, index){
-       return Card(
-         child: ListTile(
-            leading: Text('${posts[index].id}'),
-            title: Text(posts[index].title),
-            subtitle: Text(posts[index].body),
-         
-         
-            ),
-            
-       );
-       
-      },
-      itemCount: posts.length
-      ),
+      body: (posts.isEmpty)
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : ListView.builder(
+              physics: BouncingScrollPhysics(),
+              itemBuilder: (context, index) {
+                return Card(
+                  child: ListTile(
+                    leading: Text('${posts[index].id}'),
+                    title: Text(posts[index].title),
+                    subtitle: Text(posts[index].body),
+                  ),
+                );
+              },
+              itemCount: posts.length),
     );
   }
 }
