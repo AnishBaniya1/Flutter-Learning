@@ -1,4 +1,4 @@
-import 'package:bloc_api/src/features/posts/presentation/post_page.dart';
+import 'package:bloc_api/src/features/posts/presentation/comment_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
             ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => PostPage()));
+                      MaterialPageRoute(builder: (context) => CommentPage()));
                 },
                 child: Text('PostPage')),
           ],

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class PostPage extends StatefulWidget {
-  const PostPage({super.key});
+class CommentPage extends StatefulWidget {
+  const CommentPage({super.key});
 
   @override
-  State<PostPage> createState() => _PostPageState();
+  State<CommentPage> createState() => _CommentPageState();
 }
 
-class _PostPageState extends State<PostPage> {
+class _CommentPageState extends State<CommentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
