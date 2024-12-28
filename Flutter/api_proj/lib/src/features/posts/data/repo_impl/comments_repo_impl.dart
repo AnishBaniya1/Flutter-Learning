@@ -16,7 +16,7 @@ class CommentsRepositoryImpl implements CommentsRepository {
 
 
 // You (the app) want to fetch some blog comments.
-// Instead of fetching the posts directly from the internet, you send a request to your middleman (PostsRepositoryImpl).
+// Instead of fetching the posts directly from the internet, you send a request to your middleman (CommentssRepositoryImpl).
 // The middleman doesn't actually fetch the posts themselves. Instead, they forward the request to a 
-//remote source (_postsRemoteSource), which is responsible for doing the hard work of contacting the internet or server.
+//remote source (_commentsRemoteSource), which is responsible for doing the hard work of contacting the internet or server.
 // Once the remote source gets the posts, it sends them back to the middleman, who then hands them back to you.

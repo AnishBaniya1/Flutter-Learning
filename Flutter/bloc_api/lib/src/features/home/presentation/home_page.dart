@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => CommentPage()));
                 },
-                child: Text('PostPage')),
+                child: Text('Comment Page')),
           ],
         ),
       ),
