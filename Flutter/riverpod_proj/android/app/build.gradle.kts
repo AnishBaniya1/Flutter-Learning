@@ -8,7 +8,7 @@ plugins {
 android {
     namespace = "com.example.riverpod_proj"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = 30.0.14904198
+    ndkVersion = "30.0.14904198"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
