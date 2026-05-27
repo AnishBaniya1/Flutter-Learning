@@ -1,15 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_proj/core/controllers/sync_todolist_notifier.dart';
 
-class TodoSyncListScreen extends StatelessWidget {
+class TodoSyncListScreen extends ConsumerWidget {
   const TodoSyncListScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(syncTodolistProvider);
+    final stateNotifier = ref.read(syncTodolistProvider.notifier);
     return Scaffold(
       appBar: AppBar(title: const Text('Todo Sync List')),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          stateNotifier.addTodoItem();
+        },
+        child: const Icon(Icons.add),
+      ),
       body: ListView.builder(
+        itemCount: state.items.length,
         itemBuilder: (context, index) {
-          return ListTile(title: Text("Todo Item $index"));
+          final item = state.items[index];
+          return Dismissible(
+            key: ValueKey("${item.title}$index"),
+            background: Container(
+              color: Colors.red,
+              alignment: Alignment.centerRight,
+              padding: const EdgeInsets.only(right: 20),
+              child: const Icon(Icons.delete, color: Colors.white),
+            ),
+            confirmDismiss: (_) {
+              stateNotifier.removeTodoItem(index);
+              return Future.value(true);
+            },
+            child: ListTile(onTap: () {}, title: Text(item.title)),
+          );
         },
       ),
     );

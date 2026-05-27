@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_proj/ui/screens/todo_sync_list_screen.dart';
 
 void main() {
-  runApp(App());
+  runApp(ProviderScope(child: App()));
 }
 
 class App extends StatelessWidget {
