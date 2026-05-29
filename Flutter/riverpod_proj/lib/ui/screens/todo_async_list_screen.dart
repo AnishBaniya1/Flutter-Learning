@@ -1,31 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_proj/core/controllers/sync_todolist_notifier.dart';
-import 'package:riverpod_proj/ui/screens/todo_async_list_screen.dart';
+import 'package:riverpod_proj/core/controllers/async_todolist_notifier.dart';
 
-class TodoSyncListScreen extends ConsumerWidget {
-  const TodoSyncListScreen({super.key});
+
+class TodoAsyncListScreen extends ConsumerWidget {
+  const TodoAsyncListScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(syncTodolistProvider);
-    final stateNotifier = ref.read(syncTodolistProvider.notifier);
+    final state = ref.watch(asyncTodolistProvider);
+    final stateNotifier = ref.read(asyncTodolistProvider.notifier);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Todo Sync List'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const TodoAsyncListScreen(),
-                ),
-              );
-            },
-            child: Text("Async Todo List"),
-          ),
-        ],
-      ),
+      appBar: AppBar(title: const Text('Todo Sync List')),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           stateNotifier.addTodoItem();
