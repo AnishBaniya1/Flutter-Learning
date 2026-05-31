@@ -271,7 +271,7 @@ as List<TodoItem>,
 /// @nodoc
 mixin _$TodoItem {
 
- String get title;
+ int get id; String get title; bool get completed;
 /// Create a copy of TodoItem
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -282,16 +282,16 @@ $TodoItemCopyWith<TodoItem> get copyWith => _$TodoItemCopyWithImpl<TodoItem>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TodoItem&&(identical(other.title, title) || other.title == title));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TodoItem&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.completed, completed) || other.completed == completed));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,title);
+int get hashCode => Object.hash(runtimeType,id,title,completed);
 
 @override
 String toString() {
-  return 'TodoItem(title: $title)';
+  return 'TodoItem(id: $id, title: $title, completed: $completed)';
 }
 
 
@@ -302,7 +302,7 @@ abstract mixin class $TodoItemCopyWith<$Res>  {
   factory $TodoItemCopyWith(TodoItem value, $Res Function(TodoItem) _then) = _$TodoItemCopyWithImpl;
 @useResult
 $Res call({
- String title
+ int id, String title, bool completed
 });
 
 
@@ -319,10 +319,12 @@ class _$TodoItemCopyWithImpl<$Res>
 
 /// Create a copy of TodoItem
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? title = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? completed = null,}) {
   return _then(_self.copyWith(
-title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String,
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String,completed: null == completed ? _self.completed : completed // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -404,10 +406,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String title)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String title,  bool completed)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TodoItem() when $default != null:
-return $default(_that.title);case _:
+return $default(_that.id,_that.title,_that.completed);case _:
   return orElse();
 
 }
@@ -425,10 +427,10 @@ return $default(_that.title);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String title)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String title,  bool completed)  $default,) {final _that = this;
 switch (_that) {
 case _TodoItem():
-return $default(_that.title);}
+return $default(_that.id,_that.title,_that.completed);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -442,10 +444,10 @@ return $default(_that.title);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String title)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String title,  bool completed)?  $default,) {final _that = this;
 switch (_that) {
 case _TodoItem() when $default != null:
-return $default(_that.title);case _:
+return $default(_that.id,_that.title,_that.completed);case _:
   return null;
 
 }
@@ -457,10 +459,12 @@ return $default(_that.title);case _:
 
 
 class _TodoItem implements TodoItem {
-  const _TodoItem({required this.title});
+  const _TodoItem({required this.id, required this.title, this.completed = false});
   
 
+@override final  int id;
 @override final  String title;
+@override@JsonKey() final  bool completed;
 
 /// Create a copy of TodoItem
 /// with the given fields replaced by the non-null parameter values.
@@ -472,16 +476,16 @@ _$TodoItemCopyWith<_TodoItem> get copyWith => __$TodoItemCopyWithImpl<_TodoItem>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TodoItem&&(identical(other.title, title) || other.title == title));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TodoItem&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.completed, completed) || other.completed == completed));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,title);
+int get hashCode => Object.hash(runtimeType,id,title,completed);
 
 @override
 String toString() {
-  return 'TodoItem(title: $title)';
+  return 'TodoItem(id: $id, title: $title, completed: $completed)';
 }
 
 
@@ -492,7 +496,7 @@ abstract mixin class _$TodoItemCopyWith<$Res> implements $TodoItemCopyWith<$Res>
   factory _$TodoItemCopyWith(_TodoItem value, $Res Function(_TodoItem) _then) = __$TodoItemCopyWithImpl;
 @override @useResult
 $Res call({
- String title
+ int id, String title, bool completed
 });
 
 
@@ -509,10 +513,12 @@ class __$TodoItemCopyWithImpl<$Res>
 
 /// Create a copy of TodoItem
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? title = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? completed = null,}) {
   return _then(_TodoItem(
-title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String,
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String,completed: null == completed ? _self.completed : completed // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

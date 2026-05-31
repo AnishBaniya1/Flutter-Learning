@@ -10,9 +10,9 @@ class SyncTodolistNotifier extends _$SyncTodolistNotifier {
   SyncTodoState build() {
     return SyncTodoState(
       items: [
-        TodoItem(title: 'Sample Todo 1'),
-        TodoItem(title: 'Sample Todo 2'),
-        TodoItem(title: 'Sample Todo 3'),
+        TodoItem(id: 1, title: 'Sample Todo 1'),
+        TodoItem(id: 2, title: 'Sample Todo 2'),
+        TodoItem(id: 3, title: 'Sample Todo 3'),
       ],
     );
   }
@@ -22,7 +22,7 @@ class SyncTodolistNotifier extends _$SyncTodolistNotifier {
     state = state.copyWith(
       items: [
         ...state.items,
-        TodoItem(title: title),
+        TodoItem(id: state.items.length + 1, title: title),
       ],
     );
   }

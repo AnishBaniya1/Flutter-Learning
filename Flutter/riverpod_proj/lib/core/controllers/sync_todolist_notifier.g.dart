@@ -42,7 +42,7 @@ final class SyncTodolistNotifierProvider
 }
 
 String _$syncTodolistNotifierHash() =>
-    r'1863998b1de95077559bf89b997bbf5eac38c075';
+    r'6ed18ae8f7a417d3fd7025794234a982882c80ef';
 
 abstract class _$SyncTodolistNotifier extends $Notifier<SyncTodoState> {
   SyncTodoState build();

@@ -1,7 +1,7 @@
 import 'package:faker/faker.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:riverpod_proj/core/models/async_todo_state.dart';
-import 'package:riverpod_proj/core/models/sync_todo_state.dart';
+import 'package:riverpod_proj/core/services/async_todo_service.dart';
 
 part 'async_todolist_notifier.g.dart';
 
@@ -9,13 +9,9 @@ part 'async_todolist_notifier.g.dart';
 class AsyncTodolistNotifier extends _$AsyncTodolistNotifier {
   @override
   FutureOr<AsyncTodoState> build() async {
-    return AsyncTodoState(
-      items: [
-        TodoItem(title: 'Async Todo 1'),
-        TodoItem(title: 'Async Todo 2'),
-        TodoItem(title: 'Async Todo 3'),
-      ],
-    );
+    final asyncTodoService = ref.read(asyncTodoServiceProvider);
+    final data = await asyncTodoService.fetchTodoItems();
+    return AsyncTodoState(items: data);
   }
 
   void addTodoItem() {
