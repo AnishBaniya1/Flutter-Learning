@@ -11,7 +11,7 @@ class TodoAsyncListScreen extends ConsumerWidget {
     final stateNotifier = ref.read(asyncTodolistProvider.notifier);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Todo Sync List')),
+      appBar: AppBar(title: const Text('Todo Async List')),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           stateNotifier.addTodoItem();

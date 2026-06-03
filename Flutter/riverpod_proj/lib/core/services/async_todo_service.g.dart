@@ -26,7 +26,7 @@ final class AsyncTodoServiceProvider
         argument: null,
         retry: null,
         name: r'asyncTodoServiceProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -53,4 +53,4 @@ final class AsyncTodoServiceProvider
   }
 }
 
-String _$asyncTodoServiceHash() => r'42346b5dfbe005d396ccc6e6c40117f36dfc4d02';
+String _$asyncTodoServiceHash() => r'4f41131978156ba11623399962d1a50e6cb397fd';

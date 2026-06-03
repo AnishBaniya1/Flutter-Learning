@@ -1,31 +1,53 @@
 import 'package:faker/faker.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:riverpod_proj/core/models/async_todo_state.dart';
+import 'package:riverpod_proj/core/models/sync_todo_state.dart';
 import 'package:riverpod_proj/core/services/async_todo_service.dart';
 
 part 'async_todolist_notifier.g.dart';
 
 @riverpod
 class AsyncTodolistNotifier extends _$AsyncTodolistNotifier {
+  AsyncTodoService get _asyncTodoService {
+    return ref.read(asyncTodoServiceProvider);
+  }
+
   @override
   FutureOr<AsyncTodoState> build() async {
-    final asyncTodoService = ref.read(asyncTodoServiceProvider);
-    final data = await asyncTodoService.fetchTodoItems();
+    final data = await _asyncTodoService.fetchTodoItems();
     return AsyncTodoState(items: data);
   }
 
-  void addTodoItem() {
-    final title = Faker().lorem.sentence();
-    // state = state.copyWith(
-    //   items: [
-    //     ...state.items,
-    //     TodoItem(title: title),
-    //   ],
-    // );
+  Future<void> addTodoItem() async {
+    state = AsyncLoading();
+
+    try {
+      final title = Faker().lorem.sentence();
+      var newItem = TodoItem(
+        id: DateTime.now().millisecondsSinceEpoch,
+        title: title,
+        completed: false,
+      );
+
+      final id = await _asyncTodoService.addTodoItem(newItem);
+      newItem = newItem.copyWith(id: id);
+      state = AsyncData(
+        state.value!.copyWith(items: [...state.value!.items, newItem]),
+      );
+    } catch (e) {
+      // state = AsyncValue.error(e, StackTrace.current);
+    }
   }
 
-  void removeTodoItem(int index) {
-    // final updatedItems = List<TodoItem>.from(state.items)..removeAt(index);
-    // state = state.copyWith(items: updatedItems);
+  Future<void> removeTodoItem(int id) async {
+    state = AsyncLoading();
+
+    try {
+      await _asyncTodoService.removeTodoItem(id);
+      final data = await _asyncTodoService.fetchTodoItems();
+      state = AsyncData(state.value!.copyWith(items: [...data]));
+    } catch (e) {
+      // state = AsyncValue.error(e, StackTrace.current);
+    }
   }
 }
