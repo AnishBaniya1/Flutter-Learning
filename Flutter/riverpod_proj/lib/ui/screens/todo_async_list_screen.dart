@@ -10,6 +10,15 @@ class TodoAsyncListScreen extends ConsumerWidget {
     final asyncstate = ref.watch(asyncTodolistProvider);
     final stateNotifier = ref.read(asyncTodolistProvider.notifier);
 
+    ref.listen(asyncTodolistProvider, (previous, next) {
+      if (next.hasError) {
+        final error = next.error;
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Error:$error')));
+      }
+    });
+
     return Scaffold(
       appBar: AppBar(title: const Text('Todo Async List')),
       floatingActionButton: FloatingActionButton(
@@ -19,6 +28,7 @@ class TodoAsyncListScreen extends ConsumerWidget {
         child: const Icon(Icons.add),
       ),
       body: asyncstate.when(
+        skipError: true,
         error: (error, _) => Center(child: Text('Error:$error')),
         loading: () => Center(child: const CircularProgressIndicator()),
         data: (state) {
@@ -35,7 +45,7 @@ class TodoAsyncListScreen extends ConsumerWidget {
                   child: const Icon(Icons.delete, color: Colors.white),
                 ),
                 confirmDismiss: (_) {
-                  stateNotifier.removeTodoItem(index);
+                  stateNotifier.removeTodoItem(item.id);
                   return Future.value(true);
                 },
                 child: ListTile(onTap: () {}, title: Text(item.title)),

@@ -19,9 +19,10 @@ class AsyncTodolistNotifier extends _$AsyncTodolistNotifier {
   }
 
   Future<void> addTodoItem() async {
-    state = AsyncLoading();
 
     try {
+    state = AsyncLoading();
+
       final title = Faker().lorem.sentence();
       var newItem = TodoItem(
         id: DateTime.now().millisecondsSinceEpoch,
@@ -35,19 +36,20 @@ class AsyncTodolistNotifier extends _$AsyncTodolistNotifier {
         state.value!.copyWith(items: [...state.value!.items, newItem]),
       );
     } catch (e) {
-      // state = AsyncValue.error(e, StackTrace.current);
+      state = AsyncValue.error(e, StackTrace.current);
     }
   }
 
   Future<void> removeTodoItem(int id) async {
-    state = AsyncLoading();
 
     try {
+    state = AsyncLoading();
+
       await _asyncTodoService.removeTodoItem(id);
       final data = await _asyncTodoService.fetchTodoItems();
       state = AsyncData(state.value!.copyWith(items: [...data]));
     } catch (e) {
-      // state = AsyncValue.error(e, StackTrace.current);
+      state = AsyncValue.error(e, StackTrace.current);
     }
   }
 }
